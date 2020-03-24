@@ -3,18 +3,6 @@
 ## Author
 **Kartik Venkataraman**
 
-There are three steps in the whole process:
-1. Getting frames from the video. For this, you have to run ​ frame_generator.py.
-For now, we have to manually give the video filename inside the code but will be
-changed to taking argument from the terminal in the next submission.
-2. Second step is the instance segmentation and background removal from each of
-the extracted frames. For this, we will run ​ seg_backrem.py. ​ In this case also, for
-now, we have to manually give the frames path inside the code but will be
-changed to taking argument from the terminal in the next submission.
-3. The final step is testing each of the background removed frames by running
-test_modified.py. ​ This will also generate the required plot that at a specific time,
-what is the predicted probability of heart attack and also creates the json file.
-
 
 ## Preprocessing
 
