@@ -23,7 +23,7 @@ NET = load_model(MODEL_PATH)
 NET.summary()
 
 from subprocess import check_output
-file_name = "./scene_5.mp4"
+file_name = "./videos/video_1.mp4"
 a = str(check_output('ffprobe -i  "'+file_name+'" 2>&1 |grep "Duration"',shell=True))
 a = a.split(",")[0].split("Duration:")[1].strip()
 h, m, s = a.split(':')
@@ -38,7 +38,8 @@ def predict(file):
     array = NET.predict(x)
     result = array[0]
     answer = np.argmax(result)
-    return CLASSES[answer], result
+    print(CLASSES[answer], result)
+    return result[1]
 
 
 numbers = re.compile(r'(\d+)')
@@ -51,12 +52,12 @@ pred = []
 time = []
 dictlist = []
 
-for img in sorted(glob.glob('./fg-extract-kartikv/*'), key=numericalSort):
+for img in sorted(glob.glob('./fg-extract/*'), key=numericalSort):
     maxx = re.search(r'(\d+)', img).group(0)
 
 print(maxx)
 
-for img in sorted(glob.glob('./fg-extract-kartikv/*'), key=numericalSort):
+for img in sorted(glob.glob('./fg-extract/*'), key=numericalSort):
     try :
         k = predict(img)
         print(img)
@@ -74,9 +75,10 @@ for img in sorted(glob.glob('./fg-extract-kartikv/*'), key=numericalSort):
 plt.plot(time, pred)
 plt.xlabel('Time in seconds')
 plt.ylabel('pred. prob. of heart attack')
-plt.show()
+#plt.show()
+plt.savefig('./figures/video_detect.png')
 
 #print(dictlist)
 dicto = {"heart-attack" : str(dictlist)}
-with open('timeLabel.json', 'w') as json_file:
+with open('./figures/timeLabel.json', 'w') as json_file:
   json.dump(dicto, json_file)
