@@ -6,7 +6,7 @@
 
 ## Preprocessing
 
-(1) mkdir dataset && mkdir videos && mkdir model && mkdir frames && mkdir fg-extract <br>
+(1) mkdir dataset && mkdir videos && mkdir model && mkdir frames && mkdir fg-extract && mkdir figures<br>
 (2) Download dataset from [here](https://drive.google.com/drive/folders/16HhfMovQMS8iMgBVFRwJ4tmpOwmVzprG?usp=sharing) by logging with TAMU email and put them under ``dataset`` folder <br>
 (3) Download videos from [here](https://drive.google.com/drive/folders/1ka5vGFS09oeEejoiIFoFbgdrHPmMXCxr?usp=sharing) by logging with TAMU email and put them under ``videos`` folder <br>
 
@@ -52,4 +52,6 @@ This command will generate the segmented image for the frames and save them in `
 The final step is the evaluation of each of the segmented frames in the ``fg-extract`` directory. <br>
 This will also generate the required plot that at a specific time,
 what is the predicted probability of heart attack and also creates the json file. <br>
+
+#### README will be constantly updated with progress in the project. Stay tuned. :smile:
 
