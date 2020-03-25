@@ -7,6 +7,8 @@ import numpy as np
 import cv2
 import os
 import torchvision.transforms as T
+import glob
+import shutil
 
 def decode_segmap(image, source, nc=21):
   label_colors = np.array([(0, 0, 0),  # 0=background
@@ -68,9 +70,15 @@ def segment(net, path, show_orig=True, dev='cuda'):
     om = torch.argmax(out.squeeze(), dim=0).detach().cpu().numpy()
     rgb = decode_segmap(om, path)
     ps = os.path.basename(path)
-    plt.imshow(rgb); plt.imsave('./fg-extract/' + ps ,rgb); plt.axis('off'); plt.show()
+    plt.imshow(rgb); plt.imsave(dir_path + ps ,rgb); plt.axis('off'); plt.show()
 
-import glob
+
+dir_path = "./fg-extract/"
+
+if os.path.exists(dir_path):
+  shutil.rmtree(dir_path)
+
+os.mkdir(dir_path)
 
 for img in glob.glob('./frames/*.jpg'):
     try:
