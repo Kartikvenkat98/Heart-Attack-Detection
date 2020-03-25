@@ -52,7 +52,7 @@ This command will generate the segmented image for the frames and save them in `
 The final step is the evaluation of each of the segmented frames in the ``fg-extract`` directory. <br>
 This will also generate the required plot of the predicted probability of heart attack at a specific time instant and also creates the corresponding json file. <br>
 For example, <br>
-``python frame_generator.py ./videos/video_1.mp4`` <br>
+``python test_modified.py ./videos/video_1.mp4`` <br>
 
 
 #### README will be constantly updated with progress in the project. Stay tuned. :smile:
