@@ -1,4 +1,4 @@
-from os import scandir
+import os
 import numpy as np
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
@@ -7,9 +7,10 @@ import glob
 import matplotlib.pyplot as plt
 import re
 import json
+import sys
+from subprocess import check_output
 
 
-INPUT_PATH_TEST = "./dataset/test/"
 MODEL_PATH = "./model/" + "model.h5"    
 
 
@@ -22,8 +23,8 @@ print("Loading model from:", MODEL_PATH)
 NET = load_model(MODEL_PATH)
 NET.summary()
 
-from subprocess import check_output
-file_name = "./videos/video_1.mp4"
+
+file_name = sys.argv[1]
 a = str(check_output('ffprobe -i  "'+file_name+'" 2>&1 |grep "Duration"',shell=True))
 a = a.split(",")[0].split("Duration:")[1].strip()
 h, m, s = a.split(':')
@@ -72,13 +73,18 @@ for img in sorted(glob.glob('./fg-extract/*'), key=numericalSort):
 
 #print(time)
 
+dir_path = "./figures/"
+
+if not os.path.exists(dir_path):
+  os.mkdir(dir_path)
+
 plt.plot(time, pred)
 plt.xlabel('Time in seconds')
 plt.ylabel('pred. prob. of heart attack')
 #plt.show()
-plt.savefig('./figures/video_detect.png')
+plt.savefig(dir_path + 'video_detect.png')
 
 #print(dictlist)
 dicto = {"heart-attack" : str(dictlist)}
-with open('./figures/timeLabel.json', 'w') as json_file:
+with open(dir_path + 'timeLabel.json', 'w') as json_file:
   json.dump(dicto, json_file)
