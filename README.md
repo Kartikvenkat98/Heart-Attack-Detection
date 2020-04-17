@@ -22,7 +22,7 @@ Install OpenPose in your Google Colab working directory by following the instruc
 ``./build/examples/openpose/openpose.bin --image_dir path-to-images-directory --write-images path-to-rendered-images-directory --write_json path-to-json-pose-directory --display 0`` <br>
 This command will generate body landmarks for all the images in the given directory and save the rendered images in ``dataset_pose`` and json in ``json_pose`` directory. <br>
 For example, <br>
-``/build/examples/openpose/openpose.bin --image_dir ../dataset/train --write_images ../dataset_pose/train --write_json ../json_pose/train --display 0`` <br>
+``./build/examples/openpose/openpose.bin --image_dir ../dataset/train --write_images ../dataset_pose/train --write_json ../json_pose/train --display 0`` <br>
 
 
 ## Training the model
