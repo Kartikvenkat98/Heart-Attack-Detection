@@ -28,8 +28,8 @@ For example, <br>
 ## Training the model
 
 ``python train.py`` <br>
-This command will train the CNN on the images in the ``train`` folder inside the ``dataset`` directory and save the trained model as model.h5 under ``model`` folder. <br>
-For training on the Openpose rendered images, change the path to ``train`` folder inside the ``dataset_pose`` directory and save the model as model_pose.h5 under ``model`` folder. <br>
+This command will train the CNN on the images in the ``train`` folder inside the ``dataset`` directory and save the trained model as ``model.h5`` under ``model`` folder. <br>
+For training on the Openpose rendered images, change the path to ``train`` folder inside the ``dataset_pose`` directory and save the model as ``model_pose.h5`` under ``model`` folder. <br>
 
 Alternatively, you can directly use the trained uploaded model.
 
@@ -43,26 +43,39 @@ The initial model shows 91.75% accuracy. <br>
 The model trained on Openpose rendered images shows 93.25% accuracy. <br>
 
 
+## Facial Expression Recognition
+
+The dataset for Facial Expression Recognition that I used is FER 2013 which can be found [here](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data)
+
+
+## Training the FER model
+
+``python train_fer.py`` <br>
+This command will train the CNN on the ``train.csv`` inside the ``dataset`` directory and save the model configuraion and trained model as ``model_fer.json`` and ``model_fer.h5`` respectively under ``model`` folder. <br>
+
+Alternatively, you can directly use the trained uploaded model.
+
+
+## Testing the model
+
+``python test_fer.py`` <br>
+This command will predict the emotion based on the facial expressions om ``test.csv`` inside the ``dataset`` directory. <br>
+The model shows 57.43% accuracy, which is very good considering it is a multi-class classification problem. <br>
+
+
 ## Detection in Videos
 
-There are four steps for detecting possible heart-attacks from videos.
+There are three steps for detecting possible heart-attacks from videos.
 
-### (1) Generating body landmarks on the video using Openpose
-
-``./build/examples/openpose/openpose.bin --hand --video path-to-video-file --write_video path-to-video-pose --write_json path-to-json-output --display 0``<br>
-This command will generate body landmarks for the whole video and save the rendered video in the video_pose directory. <br>
-For example, <br>
-``./build/examples/openpose/openpose.bin --hand --video ../videos/video_1.mp4 --write_video ../videos_pose/video_1.mp4 --write_json ../json_pose/video_1 --display 0`` <br>
-
-### (2) Frame Generation from videos
+### (1) Frame Generation from videos
 
 ``python frame_generator.py path-to-video-file`` <br>
 This command will generate frames for a given video and save it in the ``frames`` directory. <br>
 For example, <br>
-``python frame_generator.py ./videos_pose/video_1.mp4`` <br>
+``python frame_generator.py ./videosvideo_1.mp4`` <br>
 
 
-### (3) Instance Segmentation and Background Removal
+### (2) Instance Segmentation and Background Removal
 
 ``python seg_backrem.py`` <br>
 The next step is the instance segmentation and background removal from each of the extracted frames in the ``frames`` directory. <br>
@@ -70,13 +83,13 @@ The background is changed to magenta color for having the contrast for the segme
 This command will generate the segmented image for the frames and save them in ``fg-extract`` folder. <br>
 
 
-### (4) Evaluation
+### (3) Evaluation
 
 ``python test_modified.py path-to-video-file`` <br>
 The final step is the evaluation of each of the segmented frames in the ``fg-extract`` directory. <br>
 This will also generate the required plot of the predicted probability of heart attack at a specific time instant and also creates the corresponding json file. <br>
 For example, <br>
-``python test_modified.py ./videos_pose/video_1.mp4`` <br>
+``python test_modified.py ./videos/video_1.mp4`` <br>
 
 
 #### README will be constantly updated with progress in the project. Stay tuned. :smile:
