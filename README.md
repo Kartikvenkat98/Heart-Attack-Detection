@@ -72,7 +72,7 @@ There are three steps for detecting possible heart-attacks from videos.
 ``python frame_generator.py path-to-video-file`` <br>
 This command will generate frames for a given video and save it in the ``frames`` directory. <br>
 For example, <br>
-``python frame_generator.py ./videosvideo_1.mp4`` <br>
+``python frame_generator.py ./videos/video_1.mp4`` <br>
 
 
 ### (2) Instance Segmentation and Background Removal
