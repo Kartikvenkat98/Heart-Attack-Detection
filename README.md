@@ -6,18 +6,21 @@
 
 ## Preprocessing
 
-(1) mkdir dataset && mkdir videos && mkdir dataset_pose && mkdir videos_pose && mkdir json_pose<br>
-(2) Download dataset from [here](https://drive.google.com/drive/folders/16HhfMovQMS8iMgBVFRwJ4tmpOwmVzprG?usp=sharing) by logging with TAMU email and put them under ``dataset`` folder <br>
-(3) Download videos from [here](https://drive.google.com/drive/folders/1ka5vGFS09oeEejoiIFoFbgdrHPmMXCxr?usp=sharing) by logging with TAMU email and put them under ``videos`` folder <br>
+
+(1) Clone this repository by entering your Github ``username`` and ``password``.<br>
+ ``git clone https://username:password@github.com/Kartikvenkat98/Heart-Attack-Detection.git``<br>
+(2) ``mkdir dataset && mkdir videos && mkdir dataset_pose && mkdir videos_pose && mkdir json_pose``<br>
+(3) Download dataset from [here](https://drive.google.com/drive/folders/16HhfMovQMS8iMgBVFRwJ4tmpOwmVzprG?usp=sharing) by logging with TAMU email and put them under ``dataset`` folder <br>
+(4) Download videos from [here](https://drive.google.com/drive/folders/1ka5vGFS09oeEejoiIFoFbgdrHPmMXCxr?usp=sharing) by logging with TAMU email and put them under ``videos`` folder <br>
 
 
-## Installing Openpose
+### Installing Openpose
 
 [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose) is a tool for generating facial/body landmarks for humans in videos and images. <br>
 Install OpenPose in your Google Colab working directory by following the instructions found [here](https://colab.research.google.com/github/tugstugi/dl-colab-notebooks/blob/master/notebooks/OpenPose.ipynb). <br>
 
 
-## Running Openpose on Images
+### Running Openpose on Images
 
 ``./build/examples/openpose/openpose.bin --image_dir path-to-images-directory --write_images path-to-rendered-images-directory --write_json path-to-json-pose-directory --display 0`` <br>
 This command will generate body landmarks for all the images in the given directory and save the rendered images in ``dataset_pose`` and json in ``json_pose`` directory. <br>
@@ -56,7 +59,7 @@ This command will train the CNN on the ``train.csv`` inside the ``dataset`` dire
 Alternatively, you can directly use the trained uploaded model.
 
 
-## Testing the model
+## Testing the FER model
 
 ``python test_fer.py`` <br>
 This command will predict the emotion based on the facial expressions om ``test.csv`` inside the ``dataset`` directory. <br>
@@ -90,6 +93,14 @@ The final step is the evaluation of each of the segmented frames in the ``fg-ext
 This will also generate the required plot of the predicted probability of heart attack at a specific time instant and also creates the corresponding json file. <br>
 For example, <br>
 ``python test_modified.py ./videos/video_1.mp4`` <br>
+
+
+## Execution Script
+
+To quickly test the code like ``download-and-run``, just replace the variables username, password and video in ``test.sh``.<br>
+Then run the two commands:<br>
+``chmod +x test.sh``<br>
+``!sh test.sh``<br>
 
 
 #### README will be constantly updated with progress in the project. Stay tuned. :smile:
