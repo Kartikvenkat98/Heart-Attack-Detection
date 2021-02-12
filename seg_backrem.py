@@ -56,9 +56,16 @@ def decode_segmap(image, source, nc=21):
   foreground = cv2.multiply(alpha, foreground)
   background = cv2.multiply(1.0 - alpha, background)
   outImage = cv2.add(foreground, background)
-  return outImage/255
+  outImage = outImage/255
+  with np.nditer(outImage, op_flags=['readwrite']) as it:
+    for x in it:
+      if(x < 0.0):
+        x[...] = 0.0
+      elif(x > 1.0):
+        x[...] = 1.0
+  return outImage
 
-def segment(net, path, show_orig=True, dev='cuda'):
+def segment(net, path, show_orig=False, dev='cuda'):
     img = Image.open(path)
     if show_orig: plt.imshow(img); plt.axis('off'); plt.show()
     trf = T.Compose([T.Resize(640),  
@@ -70,7 +77,9 @@ def segment(net, path, show_orig=True, dev='cuda'):
     om = torch.argmax(out.squeeze(), dim=0).detach().cpu().numpy()
     rgb = decode_segmap(om, path)
     ps = os.path.basename(path)
-    plt.imshow(rgb); plt.imsave(dir_path + ps ,rgb); plt.axis('off'); plt.show()
+    #plt.imshow(rgb); 
+    print(path)
+    plt.imsave(dir_path + ps ,rgb); plt.axis('off'); #plt.show()
 
 
 dir_path = "./fg-extract/"
@@ -86,4 +95,3 @@ for img in glob.glob('./frames/*.jpg'):
     
     except Exception as e:
         print (e)
-

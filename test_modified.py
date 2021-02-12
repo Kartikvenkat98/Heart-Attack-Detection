@@ -107,7 +107,7 @@ for img in sorted(glob.glob('./fg-extract/*'), key=numericalSort):
           count += 1
             #else:
               #k = 0.0001
-          if count >= 10:
+          if count >= 30:
             flag = True
         if flag:
           emo = face_analysis(img)
